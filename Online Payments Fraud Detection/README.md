@@ -9,7 +9,8 @@ Here are some plotly plot which may not visible in notebook preview.
 
 fig1: Correlation between isFraud feature with other features
 
-
+![Correlation between isFraud feature with other features](https://github.com/PranayJagtap06/ML_Projects/blob/main/Online%20Payments%20Fraud%20Detection/assets/OP_fig1.png)
 
 fig2: Transaction Type Distribution
 
+![Transaction Type Distribution](https://github.com/PranayJagtap06/ML_Projects/blob/main/Online%20Payments%20Fraud%20Detection/assets/OP_fig2.png)
