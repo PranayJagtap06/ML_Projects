@@ -11,7 +11,7 @@ fig1: EV Adoption Over Time
 
 fig2: Top Cities in Top Counties by EV Registrations
 
-![Top Cities in Top Counties by EV Registrations]https://github.com/PranayJagtap06/ML_Projects/blob/main/US%20EV%20Market%20Size%20Analysis/assets/EV_fig2.png()
+![Top Cities in Top Counties by EV Registrations](https://github.com/PranayJagtap06/ML_Projects/blob/main/US%20EV%20Market%20Size%20Analysis/assets/EV_fig2.png)
 
 fig3: Distribution of Electric Vehicle Types
 
