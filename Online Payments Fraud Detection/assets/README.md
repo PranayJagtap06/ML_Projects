@@ -1,1 +1,1 @@
-Plotly plot images.
+Plotly plot images for preview.
