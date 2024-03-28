@@ -5,7 +5,7 @@ Here are some plots which may not be visible in the notebook preview.
 
 fig1:
 
-![This is a correlation plot of Foreign Exchange Reserves with other features](Indian Economy-Foreign Exchange Reserves Prediction/assets/IE_fig1.png)
+![This is a correlation plot of Foreign Exchange Reserves with other features](/Indian Economy-Foreign Exchange Reserves Prediction/assets/IE_fig1.png)
 
 fig2:
 
