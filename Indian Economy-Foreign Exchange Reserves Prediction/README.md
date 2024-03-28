@@ -4,10 +4,13 @@ In this notebook I worked on dataset from RBI's (Reserve Bank of India) database
 Here are some plots which may not be visible in the notebook preview.
 
 fig1:
+
 ![This is a correlation plot of Foreign Exchange Reserves with other features](/assets/IE_fig1.png)
 
 fig2:
+
 ![Variation of Foreign Exchange Reserves in past few years](/assets/IE_fig2.png)
 
 fig3:
+
 ![Current and Estimated Foreign Exchange Reserves](/assets/IE_fig3.png)
