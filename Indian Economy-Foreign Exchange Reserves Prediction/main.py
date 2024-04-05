@@ -9,7 +9,12 @@ model = joblib.load('foreign_reserves_predictor.joblib')
 scaler = joblib.load('scaler.joblib')
 
 # Setting up Streamlit app page
-st.set_page_config(page_title='IndianFutureReserves', page_icon='🤖', menu_items={'Get Help': 'https://github.com/PranayJagtap06/ML_Projects/tree/main/Indian Economy-Foreign Exchange Reserves Prediction', 'About': "To be updated soon."})
+about = "Welcome to our Streamlit IndianFutureReserves application! This application is powered by a sophisticated machine learning model that predicts the future foreign exchange reserves of India in US $ million."\
+    "Our model is trained on a comprehensive dataset sourced directly from the Reserve Bank of India, ensuring the accuracy and reliability of our predictions. The dataset includes a wide range of economic indicators, providing our model with a robust foundation for forecasting."\
+    "The goal of this application is to provide users with an intuitive and interactive platform to explore and understand the dynamics of India's foreign exchange reserves. Whether you're an economist, a policy maker, a student, or just someone interested in the Indian economy, we believe this application will be a valuable tool for you."\
+    "We're committed to making complex economic forecasting accessible and understandable. We hope you find this application insightful and useful in your endeavors. Enjoy exploring!"
+
+st.set_page_config(page_title='IndianFutureReserves', page_icon='🤖', menu_items={'Get Help': 'https://github.com/PranayJagtap06/ML_Projects/tree/main/Indian Economy-Foreign Exchange Reserves Prediction', 'About': f"{about}"})
 st.title(body="IndianFutureReserves: Predicting India's Financial Fortunes 🔮💰")
 st.markdown("*Leverage the power of machine learning to unveil future trends in India's foreign exchange reserves with pinpoint precision, fueled by authoritative RBI data.*")
 
@@ -32,11 +37,12 @@ slr = st.slider("Statutory Liquidity Ratio (%)", min_value=1.00, max_value=100.0
 prr = st.slider("Policy Repo Rate (%)", min_value=1.00, max_value=100.00, value=5.45)
 sdf = st.slider("Standing Deposit Facility (SDF) Rate (%)", min_value=1.00, max_value=100.00, value=4.56)
 predict = st.button('Predict')
-st.markdown("# Prediction")
+history = st.button('History')
+delete_history = st.button('Delete History')
 
-# Initialize session state for chat history
-if "chat_history" not in st.session_state:
-    st.session_state.chat_history = []
+# Initialize session state for session history
+if "session_history" not in st.session_state:
+    st.session_state.session_history = []
 
 # Creating DataFrame
 df = pd.DataFrame(data={'Period': [period], 'Forward Premia of US$ 1-month (%)': [fp_1month],
@@ -49,7 +55,7 @@ df = pd.DataFrame(data={'Period': [period], 'Forward Premia of US$ 1-month (%)':
                         'Policy Repo Rate (%)': [prr], 'Standing Deposit Facility (SDF) Rate (%)': [sdf]})
 
 # Creating a function to predict foreign reserves
-def PredictRserves(dataframe: object, model_: object, scaler_: object):
+def predictreserves(dataframe: object, model_: object, scaler_: object):
     df_copy = dataframe.copy()
     df_copy['Period'] = pd.to_datetime(df['Period'])
     df_copy['Period'] = df_copy['Period'].map(datetime.datetime.toordinal)
@@ -60,14 +66,38 @@ def PredictRserves(dataframe: object, model_: object, scaler_: object):
     # Predict the future foreign reserves
     pred_ = model_.predict(df_copy_scaled)
 
-    return pred_[0], dataframe['Period'][0]
+    return pred_[0], dataframe['Period'][0], dataframe
+
+# Writting History function
+def display_history():
+    st.markdown("# Session History")
+    for i, item in enumerate(st.session_state.session_history):
+        df_ = item['dataframe']
+        _pred = item['prediction']
+
+        st.write('Dataframe: ')
+        st.write(df_)
+        st.write('---')
+        st.write('Prediction: ')
+        st.write(_pred)
+        st.write('---')
+        st.write('---')
 
 # If Predict button is pressed generate result and print
 if predict:
-    result_, period_ = PredictRserves(dataframe=df, model_=model, scaler_=scaler)
+    result_, period_, df = predictreserves(dataframe=df, model_=model, scaler_=scaler)
 
     # Write prediction in Streamlit
-    st.write(f"Foreign Reserves on {period_} will be ${result_} Million.")
+    st.markdown("# Prediction")
+    txt = f"Foreign Reserves on {period_} will be ${result_} Million."
+    st.write(txt)
 
+    # Add dataframe and prediction to session history
+    st.session_state.session_history.append({'dataframe': df, 'prediction': txt})
 
+if history:
+    display_history()
 
+if delete_history:
+    st.session_state.session_history.clear()
+    display_history()
