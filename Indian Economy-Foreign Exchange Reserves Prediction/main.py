@@ -1,12 +1,11 @@
 import datetime
-from unittest import result
+import numpy as np
 import pandas as pd
 import streamlit as st
 import joblib
 
 
-model = joblib.load('foreign_reserves_predictor.joblib')
-scaler = joblib.load('scaler.joblib')
+model = joblib.load('foreign_reserves_prophet.joblib')
 
 # Setting up Streamlit app page
 about = "Welcome to our Streamlit IndianFutureReserves application! This application is powered by a sophisticated machine learning model that predicts the future foreign exchange reserves of India in US $ million."\
@@ -18,7 +17,7 @@ st.set_page_config(page_title='IndianFutureReserves', page_icon='🤖', menu_ite
 st.title(body="IndianFutureReserves: Predicting India's Financial Fortunes 🔮💰")
 st.markdown("*Leverage the power of machine learning to unveil future trends in India's foreign exchange reserves with pinpoint precision, fueled by authoritative RBI data.*")
 
-# columns = ['Period', 'Forward Premia of US$ 1-month (%)', 'Forward Premia of US$ 3-month (%)', 'Forward Premia of US$ 6-month (%)', 'Reverse Repo Rate (%)', 'Marginal Standing Facility (MSF) Rate (%)', 'Bank Rate (%)', 'Base Rate (%)', '91-Day Treasury Bill (Primary) Yield (%)', '182-Day Treasury Bill (Primary) Yield (%)', '364-Day Treasury Bill (Primary) Yield (%)', '10-Year G-Sec Yield (FBIL) (%)', 'Cash Reserve Ratio (%)', 'Statutory Liquidity Ratio (%)', 'Policy Repo Rate (%)', 'Standing Deposit Facility (SDF) Rate (%)']
+# columns = ['Date', 'Forward Premia of US$ 1-month (%)', 'Forward Premia of US$ 3-month (%)', 'Forward Premia of US$ 6-month (%)', 'Reverse Repo Rate (%)', 'Marginal Standing Facility (MSF) Rate (%)', 'Bank Rate (%)', 'Base Rate (%)', '91-Day Treasury Bill (Primary) Yield (%)', '182-Day Treasury Bill (Primary) Yield (%)', '364-Day Treasury Bill (Primary) Yield (%)', '10-Year G-Sec Yield (FBIL) (%)', 'Cash Reserve Ratio (%)', 'Statutory Liquidity Ratio (%)', 'Policy Repo Rate (%)', 'Standing Deposit Facility (SDF) Rate (%)']
 
 period = st.date_input('Date', min_value=datetime.date(2023, 11, 1), max_value=datetime.date(2074, 12, 31))
 fp_1month = st.slider("Forward Premia of US$ 1-month (%)", min_value=1.00, max_value=100.00, value=7.25)
@@ -45,7 +44,7 @@ if "session_history" not in st.session_state:
     st.session_state.session_history = []
 
 # Creating DataFrame
-df = pd.DataFrame(data={'Period': [period], 'Forward Premia of US$ 1-month (%)': [fp_1month],
+df = pd.DataFrame(data={'ds': [period], 'Forward Premia of US$ 1-month (%)': [fp_1month],
                         'Forward Premia of US$ 3-month (%)': [fp_3month], 'Forward Premia of US$ 6-month (%)': [fp_6month],
                         'Reverse Repo Rate (%)': [repo_rate], 'Marginal Standing Facility (MSF) Rate (%)': [msf_rate],
                         'Bank Rate (%)': [bank_rate], 'Base Rate (%)': [base_rate],
@@ -55,23 +54,16 @@ df = pd.DataFrame(data={'Period': [period], 'Forward Premia of US$ 1-month (%)':
                         'Policy Repo Rate (%)': [prr], 'Standing Deposit Facility (SDF) Rate (%)': [sdf]})
 
 # Creating a function to predict foreign reserves
-def predictreserves(dataframe: object, model_: object, scaler_: object):
-    df_copy = dataframe.copy()
-    df_copy['Period'] = pd.to_datetime(df['Period'])
-    df_copy['Period'] = df_copy['Period'].map(datetime.datetime.toordinal)
-
-    # preprocessing dataframe for model
-    df_copy_scaled = scaler_.transform(df_copy)
-
+def predictreserves(dataframe: object, model_: object):
     # Predict the future foreign reserves
-    pred_ = model_.predict(df_copy_scaled)
+    pred_ = model_.predict(dataframe)
 
-    return pred_[0], dataframe['Period'][0], dataframe
+    return pred_['yhat'], dataframe['ds'][0], dataframe
 
 # Writting History function
 def display_history():
     st.markdown("# Session History")
-    for i, item in enumerate(st.session_state.session_history):
+    for i, item in enumerate(st.session_state.session_history[::-1]):
         df_ = item['dataframe']
         _pred = item['prediction']
 
@@ -85,15 +77,18 @@ def display_history():
 
 # If Predict button is pressed generate result and print
 if predict:
-    result_, period_, df = predictreserves(dataframe=df, model_=model, scaler_=scaler)
+    result_, date_, df_ = predictreserves(dataframe=df, model_=model)
 
     # Write prediction in Streamlit
     st.markdown("# Prediction")
-    txt = f"Foreign Reserves on {period_} will be ${result_} Million."
+    txt = f"Foreign Reserves on {date_} will be ${np.round(result_[0], 2):,} Million."
     st.write(txt)
 
+    # Renaming 'ds' column in dataframe to 'Date'
+    df_.rename(columns={'ds': 'Period'}, inplace=True)
+
     # Add dataframe and prediction to session history
-    st.session_state.session_history.append({'dataframe': df, 'prediction': txt})
+    st.session_state.session_history.append({'dataframe': df_, 'prediction': txt})
 
 if history:
     display_history()
