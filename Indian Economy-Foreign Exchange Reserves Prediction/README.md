@@ -1,6 +1,12 @@
-# Indian Economy - Foreign Exchange Reserves Prediction
+# Indian Economy - Foreign Exchange Reserves Prediction 💲💵
 In this notebook, I worked on a dataset from the Reserve Bank of India's (RBI) database. You can download the dataset from the repository, or if you want the latest dataset, you can access it by clicking the link provided in the Google Colab notebook. The dataset contains some economic indicators crucial for the country's economy. I tried to go through each indicator in the dataset, tweaking them for Exploratory Data Analysis (EDA) and model training. This is a regression task where I attempted to predict the Foreign Exchange Reserves (in US $). For this task, I first trained various regression models and compared their performances, and then finally selected the best-performing model to predict future Foreign Exchange Reserves.
 
+## IndianFutureReserves 🔮💵 Streamlit App
+IndianFutureReserves is a Streamlit app powered by Facebook's Prophet time series forecasting model trained on data from Reserve Bank of India. The app uses the same model which trained in this repo's jupyter notebook.
+[*Link to Streamlit App*](https://indianfuturereserves-05-04-2024.streamlit.app/)
+[*Streamlit App GitHub repo*](https://github.com/PranayJagtap06/IndianFutureReserves)
+
+## Plots Preview
 Here are some plots which may not be visible in the notebook preview.
 
 fig1: This is a correlation plot of Foreign Exchange Reserves with other features
