@@ -3,7 +3,9 @@ In this notebook, I worked on a dataset from the Reserve Bank of India's (RBI) d
 
 ## IndianFutureReserves 🔮💵 Streamlit App
 IndianFutureReserves is a Streamlit app powered by Facebook's Prophet time series forecasting model trained on data from Reserve Bank of India. The app uses the same model which trained in this repo's jupyter notebook.
+
 [*Link to Streamlit App*](https://indianfuturereserves-05-04-2024.streamlit.app/)
+
 [*Streamlit App GitHub repo*](https://github.com/PranayJagtap06/IndianFutureReserves)
 
 ## Plots Preview
