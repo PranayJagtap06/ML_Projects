@@ -3,6 +3,10 @@
 **Welcome to Hand Signs Classification! 🙌**
 ------------------------------------------
 
+<p align="center">
+  <img src="https://cdn-images-1.medium.com/max/2600/1*n0bmRzm1oSfagjnPdGbjMA.jpeg" alt="Leonardo AI">
+</p>
+
 This repository hosts my Colab notebook, where I've trained a Convolutional Neural Network (CNN) model using TensorFlow to classify hand signs from 0 to 5 using the [[DL.AI] Hand Signs 05 Dataset](https://www.kaggle.com/datasets/shivamaggarwal513/dlai-hand-signs-05/data) from Kaggle 📊.
 
 **Dataset Overview 📁**
@@ -76,7 +80,21 @@ The model achieved an accuracy of **88.33%** and categorical accuracy of **100.0
 -------------------------
 fig: Learning Rate vs Loss
 
-[!Learning Rate vs Loss](Hand_Signs_Classification/assets/lossvslr.png)
+<p align="center">
+  <img src="https://github.com/PranayJagtap06/ML_Projects/blob/main/Hand_Signs_Classification/assets/lossvslr.png" alt="Learning Rate vs Loss">
+</p>
+
+fig: Losses vs Epoch
+
+<p align="center">
+  <img src="https://github.com/PranayJagtap06/ML_Projects/blob/main/Hand_Signs_Classification/assets/lossesvsepoch.png" alt="Losses vs Epoch">
+</p>
+
+fig: Accuracies vs Epoch
+
+<p align="center">
+  <img src="https://github.com/PranayJagtap06/ML_Projects/blob/main/Hand_Signs_Classification/assets/accuraciesvsepoch.png" alt="Accuracies vs Epoch">
+</p>
 
 **Colab Notebook 📝**
 -----------------
