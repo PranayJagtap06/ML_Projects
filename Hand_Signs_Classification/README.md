@@ -72,6 +72,12 @@ Then the model was trained with a learning rate of 0.002 and categorical cross-e
 
 The model achieved an accuracy of **88.33%** and categorical accuracy of **100.00%** on the testing set 🎉.
 
+**Preview Plots 📊**
+-------------------------
+fig: Learning Rate vs Loss
+
+[!Learning Rate vs Loss](Hand_Signs_Classification/assets/lossvslr.png)
+
 **Colab Notebook 📝**
 -----------------
 
