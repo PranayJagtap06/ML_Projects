@@ -8,6 +8,7 @@ This repository hosts my jupyter notebooks, where I've two separate techniques t
 
   - ***[CNN Architecture Model](https://github.com/PranayJagtap06/ML_Projects/blob/d9658b8b2b821030dfadc8b5d32cfe780ad4707a/Hand_Signs_Classification/hand_signs_multiclasss_classification.ipynb)***
   - ***[Transfer Learning Model](https://github.com/PranayJagtap06/ML_Projects/blob/d9658b8b2b821030dfadc8b5d32cfe780ad4707a/Hand_Signs_Classification/handsigns_transfer_learning.ipynb)***
+  - ***[Open Transfer Learning Model Kaggle Notebook](https://www.kaggle.com/code/pranayjagtap06/handsigns-transfer-learning/notebook)***
 
 The best model among these was deployed on Streamlit.
 
@@ -120,19 +121,19 @@ The model achieved an accuracy of **88.33%** and categorical accuracy of **100.0
 
 ### **Preview Plots 📊**
 -------------------------
-fig: Learning Rate vs Loss
+*fig: Learning Rate vs Loss*
 
 <p align="center">
   <img src="https://github.com/PranayJagtap06/ML_Projects/blob/main/Hand_Signs_Classification/assets/lossvslr.png" alt="Learning Rate vs Loss">
 </p>
 
-fig: Losses vs Epoch
+*fig: Losses vs Epoch*
 
 <p align="center">
   <img src="https://github.com/PranayJagtap06/ML_Projects/blob/main/Hand_Signs_Classification/assets/lossesvsepoch.png" alt="Losses vs Epoch">
 </p>
 
-fig: Accuracies vs Epoch
+*fig: Accuracies vs Epoch*
 
 <p align="center">
   <img src="https://github.com/PranayJagtap06/ML_Projects/blob/main/Hand_Signs_Classification/assets/accuraciesvsepoch.png" alt="Accuracies vs Epoch">
@@ -198,15 +199,42 @@ Here is the workflow I followed for training the model:
     - Validation set Categorical Accuracy: 1.0
     - Validation set AUC-ROC score: 99.00%
 
-**Colab Notebook 📝**
+### **Preview Plots 📊**
+-------------------------
+
+*fig: Final Model Loss & Accuracy Curve*
+
+<p align="center">
+  <img src="https://github.com/PranayJagtap06/ML_Projects/blob/main/Hand_Signs_Classification/assets/model_tl_val_la.png" alt="Loss & Accuracy Curve">
+</p>
+
+*fig: Final Model Precision Recall Curve*
+
+<p align="center">
+  <img src="https://github.com/PranayJagtap06/ML_Projects/blob/main/Hand_Signs_Classification/assets/model_tl_val_pr.png" alt="Precision Recall Curve">
+</p>
+
+*fig: Final Model ROC Curve*
+
+<p align="center">
+  <img src="https://github.com/PranayJagtap06/ML_Projects/blob/main/Hand_Signs_Classification/assets/model_tl_val_roc.png" alt="ROC Curve">
+</p>
+
+*fig: Final Model Test set Confusion Matrix*
+
+<p align="center">
+  <img src="https://github.com/PranayJagtap06/ML_Projects/blob/main/Hand_Signs_Classification/assets/model_tl_cm.png" alt="Confusion Matrix">
+</p>
+
+**Colab/Kaggle Notebooks 📝**
 -----------------
 
-The Colab notebook in this repository provides a step-by-step guide to reproducing the results 📚. You can run the notebook in Google Colab to explore the code and experiment with different hyperparameters 🔍.
+The Colab/Kaggle notebooks in this repository provides a step-by-step guide to reproducing the results 📚. You can run the notebook in Google Colab/Kaggle to access GPU and explore the code and experiment with different hyperparameters 🔍.
 
 **Getting Started 🚀**
 -------------------
 
-To get started, simply clone this repository and open the Colab notebook in Google Colab 💻. Make sure to install the required libraries and dependencies before running the notebook 📦.
+To get started, simply clone this repository and open the notebooks in Google Colab/Kaggle 💻. Make sure to install the required libraries and dependencies before running the notebooks 📦.
 
 **Contributing 🤝**
 --------------
