@@ -164,8 +164,8 @@ Architecture:
 | **InputLayer** | *input_layer* | *tf.keras.layers.Input(shape=(224, 224, 3), batch_size=32, name="input_layer")* |
 | **Sequential** | *data_augmentation* | *tf.keras.models.Sequential([<data_augmentation_layers>], name="data_augmentation"* |
 | **Functional** | *efficientnetb0* | *tf.keras.applications.efficientnet.EfficientNetB0(include_top=False)* |
-| **GlobalAveragePooling2D** | *global_avg_pooling_layer* |
-| **Dense** | *output_layer* | *tf.keras.layers.GlobalAveragePooling2D(name="global_avg_pooling_layer")* |
+| **GlobalAveragePooling2D** | *global_avg_pooling_layer* | *tf.keras.layers.GlobalAveragePooling2D(name="global_avg_pooling_layer")* |
+| **Dense** | *output_layer* | tf.keras.layers.Dense(6, activation="softmax", name="output_layer") |
 | **Output Activation** | - | *'softmax' or tf.nn.Softmax* (for multiclass classification) |
 
 Compilation:
