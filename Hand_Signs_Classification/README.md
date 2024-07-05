@@ -1,7 +1,4 @@
-# **Hand Signs Classification using CNN & TensorFlow/Transfer Learning 🤖**
-
-**Welcome to Hand Signs Classification! 🙌**
-------------------------------------------
+# **🙌 Hand Signs Classification using CNN Architecture/Transfer Learning 🤖**
 
 <p align="center">
   <img src="https://cdn-images-1.medium.com/max/2600/1*n0bmRzm1oSfagjnPdGbjMA.jpeg" alt="Leonardo AI">
@@ -80,7 +77,7 @@ Let's take a closer look at the file hierarchy…
     +-- list_classes (HDF5 dataset)
     |   +-- 'numpy.ndarray' (6,)
 
-## Classification with CNN & TensorFlow
+## Classification with CNN Architecture
 
 ### **Preprocessing 🔧**
 -----------------
@@ -98,7 +95,6 @@ Architecture:
 
 | Hyperparameters/Layers | Values | Function |
 | ----- | ----- | ----- |
-| **Input** | *Image or Video* | Target image to learn patterns |
 | **Input Layer** | *tf.keras.layers.Input((width=64, height=64, color_channels=3), batch_size=32)* | Takes in target image and pre-processes for further layers |
 | **Convolution Layers** | *tf.keras.layers.ConvXD* (X can be multiple values) | Learns most important features from target images |
 | **Pooling Layers** | *tf.keras.layers.MaxPool2D* | Reduces the dimensionality of learned image features |
@@ -141,6 +137,66 @@ fig: Accuracies vs Epoch
 <p align="center">
   <img src="https://github.com/PranayJagtap06/ML_Projects/blob/main/Hand_Signs_Classification/assets/accuraciesvsepoch.png" alt="Accuracies vs Epoch">
 </p>
+
+## Classification with Transfer Learning
+
+In classification with transfer learning I'll use ***EfficientNetB0*** as base model of my image classification model.
+
+### **Preprocessing 🔧**
+-----------------
+
+Before training the model, I performed the following preprocessing steps:
+
+* Resizing images to size (224, 224) ⚖️
+
+I skipped normalization as EfficientNetB0 already has an in-built normalization layer. Additionally, I'm also imcluding a data augmentaion layer in my transfer learning model. Below is a section on model architecture.
+
+### **CNN Model Architecture 🏗️**
+-------------------------
+
+Transfer Learning Model has following layers:
+
+Architecture:
+
+| Hyperparameters/Layers | Name | Values |
+| ----- | ----- | ----- |
+| **InputLayer** | *input_layer* | *tf.keras.layers.Input(shape=(224, 224, 3), batch_size=32, name="input_layer")* |
+| **Sequential** | *data_augmentation* | *tf.keras.models.Sequential([<data_augmentation_layers>], name="data_augmentation"* |
+| **Functional** | *efficientnetb0* | *tf.keras.applications.efficientnet.EfficientNetB0(include_top=False)* |
+| **GlobalAveragePooling2D** | *global_avg_pooling_layer* |
+| **Dense** | *output_layer* | *tf.keras.layers.GlobalAveragePooling2D(name="global_avg_pooling_layer")* |
+| **Output Activation** | - | *'softmax' or tf.nn.Softmax* (for multiclass classification) |
+
+Compilation:
+
+| Attributes | Values |
+| ----- | ----- |
+| **Optimizer** | *'adam' or tf.keras.optimizers.Adam* |
+| **Loss Function** | *tf.metrics.SparseCategoricalCrossentropy* |
+| **Metrics** | *tf.keras.metrics.SparseCategoricalAccuracy()* |
+
+### **Training and Evaluation 📊**
+-------------------------
+
+Here is the workflow I followed for training the model:
+
+ - *Step1: Build and train a base model with Keras Functional API and data augmentation layer, with EfficientNetB0 as a base model, on only 10% of training data with Feature Extraction Transfer Learning.*
+    - Validation set loss: 108.92%
+    - Validation set sparse_categorical_accuracy: 75.00%
+    - Validation set Categorical Accuracy: 1.0
+    - Validation set AUC-ROC score: 85.00%
+ 
+ - *Step2: Fine-Tune the base model on 10% of training data by making top 10 layers of EfficientNetB0 model as trainable and reducing the learning rate by -10%.*
+    - Validation set loss: 67.49%
+    - Validation set sparse_categorical_accuracy: 88.33%
+    - Validation set Categorical Accuracy: 1.0
+    - Validation set AUC-ROC score: 93.00%
+
+ - *Step3: Re-train the fine-tuned base model on 100% of training data.*
+    - Validation set loss: 22.40%
+    - Validation set sparse_categorical_accuracy: 98.33%
+    - Validation set Categorical Accuracy: 1.0
+    - Validation set AUC-ROC score: 99.00%
 
 **Colab Notebook 📝**
 -----------------
