@@ -1,4 +1,4 @@
-# **Hand Signs Classification using CNN & TensorFlow 🤖**
+# **Hand Signs Classification using CNN & TensorFlow/Transfer Learning 🤖**
 
 **Welcome to Hand Signs Classification! 🙌**
 ------------------------------------------
@@ -7,7 +7,45 @@
   <img src="https://cdn-images-1.medium.com/max/2600/1*n0bmRzm1oSfagjnPdGbjMA.jpeg" alt="Leonardo AI">
 </p>
 
-This repository hosts my Colab notebook, where I've trained a Convolutional Neural Network (CNN) model using TensorFlow to classify hand signs from 0 to 5 using the [[DL.AI] Hand Signs 05 Dataset](https://www.kaggle.com/datasets/shivamaggarwal513/dlai-hand-signs-05/data) from Kaggle 📊.
+This repository hosts my jupyter notebooks, where I've two separate techniques to train a ML model for classifying hand signs from 0 to 5 using the [[DL.AI] Hand Signs 05 Dataset](https://www.kaggle.com/datasets/shivamaggarwal513/dlai-hand-signs-05/data) from Kaggle 📊. First technique leverages *CNN architecture* and next-in-line uses *Transfer Learning*. You can visit these notebooks to refer each technique:
+
+  - ***[CNN Architecture Model](https://github.com/PranayJagtap06/ML_Projects/blob/d9658b8b2b821030dfadc8b5d32cfe780ad4707a/Hand_Signs_Classification/hand_signs_multiclasss_classification.ipynb)***
+  - ***[Transfer Learning Model](https://github.com/PranayJagtap06/ML_Projects/blob/d9658b8b2b821030dfadc8b5d32cfe780ad4707a/Hand_Signs_Classification/handsigns_transfer_learning.ipynb)***
+
+Here is a brief comparision of test set performance of produced models from these techniques:
+
+  - CNN Architecture Model:
+     - *Test set loss: 32.83%*
+     - *Test set accuracy: 88.33%*
+     - *Test set Categorical Accuracy: 1.0*
+     - *Test set AUC-ROC score: 93.00%*
+     - *Test set Classification Report:*
+       
+         | hand signs | precision | recall | f1-score | support |
+         | ---- | ---- | ---- | ---- | ---- |
+         | hand sign 0 | 1.00 | 1.00 | 1.00 | 11 |
+         | hand sign 1 | 0.93 | 1.00 | 0.97 | 14 |
+         | hand sign 2 | 0.71 | 0.71 | 0.71 | 7 |
+         | hand sign 3 | 1.00 | 0.67 | 0.80 | 12 |
+         | hand sign 4 | 0.78 | 1.00 | 0.88 | 7 |
+         | hand sign 5 | 0.80 | 0.89 | 0.84 | 9 |
+
+
+  - Transfer Learning Model:
+    - *Test set loss: 28.21%*
+    - *Test set accuracy: 93.33%*
+    - *Test set Categorical Accuracy: 1.0*
+    - *Test set AUC-ROC score: 96.00%*
+    - *Test set Classification Report:*
+
+        | hand signs | precision | recall | f1-scre | support |
+        | ---- | ---- | ---- | ---- | ---- |
+        | hand sign 0 | 1.00 | 1.00 | 1.00 | 10 |
+        | hand sign 1 | 0.90 | 0.90 | 0.90 | 10 |
+        | hand sign 2 | 0.90 | 0.90 | 0.90 | 10 |
+        | hand sign 3 | 1.00 | 1.00 | 1.00 | 10 |
+        | hand sign 4 | 0.83 | 1.00 | 0.91 | 10 |
+        | hand sign 5 | 1.00 | 0.80 | 0.89 | 10 |
 
 **Dataset Overview 📁**
 ---------------------
@@ -36,14 +74,16 @@ Let's take a closer look at the file hierarchy…
     +-- list_classes (HDF5 dataset)
     |   +-- 'numpy.ndarray' (6,)
 
-**Preprocessing 🔧**
+## Classification with CNN & TensorFlow
+
+### **Preprocessing 🔧**
 -----------------
 
 Before training the model, I performed the following preprocessing steps:
 
 * Normalized pixel values to the range [0, 1] ⚖️
 
-**CNN Model Architecture 🏗️**
+### **CNN Model Architecture 🏗️**
 -------------------------
 
 The CNN model consists of the following layers:
