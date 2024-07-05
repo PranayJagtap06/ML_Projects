@@ -12,6 +12,12 @@ This repository hosts my jupyter notebooks, where I've two separate techniques t
   - ***[CNN Architecture Model](https://github.com/PranayJagtap06/ML_Projects/blob/d9658b8b2b821030dfadc8b5d32cfe780ad4707a/Hand_Signs_Classification/hand_signs_multiclasss_classification.ipynb)***
   - ***[Transfer Learning Model](https://github.com/PranayJagtap06/ML_Projects/blob/d9658b8b2b821030dfadc8b5d32cfe780ad4707a/Hand_Signs_Classification/handsigns_transfer_learning.ipynb)***
 
+The best model among these was deployed on Streamlit.
+
+*[Visit Hand Signs Classifier Streamlit App](https://0-5handsignclassifier.streamlit.app/)*
+
+*[Visit Hand Signs Classifier Streamlit App GitHub Repo](https://github.com/PranayJagtap06/0-5_Hand_Sign_Classifier)*
+
 Here is a brief comparision of test set performance of produced models from these techniques:
 
   - CNN Architecture Model:
@@ -108,7 +114,7 @@ Compilation:
 | **Loss Function** | *tf.metrics.SparseCategoricalCrossentropy* |Computes the loss or penalty for each sample in the batch|
 | **Metrics** | *'accuracy' or tf.metrics.Accuracy* | Used to evaluate the model's ability to correctly classify images |
 
-**Training and Evaluation 📊**
+### **Training and Evaluation 📊**
 -------------------------
 First a base model was trained using the Adam optimizer to find the ideal learning rate of the model. And the ideal learning rate was choosen as 0.002.
 
@@ -116,7 +122,7 @@ Then the model was trained with a learning rate of 0.002 and categorical cross-e
 
 The model achieved an accuracy of **88.33%** and categorical accuracy of **100.00%** on the testing set 🎉.
 
-**Preview Plots 📊**
+### **Preview Plots 📊**
 -------------------------
 fig: Learning Rate vs Loss
 
